@@ -1,4 +1,7 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist();
 
 export interface ITodoTypes {
   id: number;
@@ -8,11 +11,13 @@ export interface ITodoTypes {
 
 export const inputState = atom<string>({
   key: 'inputState',
+  effects_UNSTABLE: [persistAtom],
   default: '',
 });
 
 export const todoState = atom<ITodoTypes[]>({
   key: 'todos',
+  effects_UNSTABLE: [persistAtom],
   default: [
     {
       id: 1,
